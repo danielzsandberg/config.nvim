@@ -681,7 +681,7 @@ require('lazy').setup({
         --    https://github.com/pmizio/typescript-tools.nvim
         --
         -- But for many setups, the LSP (`ts_ls`) will work just fine
-        -- ts_ls = {},
+        ts_ls = {},
         --
 
         lua_ls = {
@@ -947,10 +947,25 @@ require('lazy').setup({
         -- Directory to install parsers and queries to (prepended to `runtimepath` to have priority)
         install_dir = vim.fn.stdpath 'data' .. '/site',
       }
-      require('nvim-treesitter').install { 'bash', 'c', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'query', 'vim', 'vimdoc' }
+      require('nvim-treesitter').install {
+        'bash',
+        'c',
+        'diff',
+        'html',
+        'lua',
+        'luadoc',
+        'markdown',
+        'markdown_inline',
+        'query',
+        'vim',
+        'vimdoc',
+        'typescript',
+        'javascript',
+        'tsx',
+      }
 
       vim.api.nvim_create_autocmd('FileType', {
-        pattern = { 'c', 'sh', 'lua' },
+        pattern = { 'c', 'sh', 'lua', 'javascript', 'typescript', 'typescriptreact' },
         callback = function()
           vim.treesitter.start()
           vim.wo[0][0].foldexpr = 'v:lua.vim.treesitter.foldexpr()'
@@ -980,7 +995,7 @@ require('lazy').setup({
   -- require 'kickstart.plugins.indent_line',
   -- require 'kickstart.plugins.lint',
   -- require 'kickstart.plugins.autopairs',
-  -- require 'kickstart.plugins.neo-tree',
+  require 'kickstart.plugins.neo-tree',
   -- require 'kickstart.plugins.gitsigns', -- adds gitsigns recommend keymaps
 
   -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
